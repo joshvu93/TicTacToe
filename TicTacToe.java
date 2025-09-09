@@ -5,35 +5,75 @@ public class TicTacToe
 {
     private final int BOARDSIZE = 3;
     private char[][] board;
-    private boolean firstPlayer;
-    private boolean gameOver;
+    private boolean firstPlayer = true;
+    private boolean gameOver = false;
 
     private enum Status 
     {
         WIN, DRAW, CONTINUE
     }
 
+    /*
+     * class constructor 
+     * Set board size and set all cells to blank ' '
+     */
     public TicTacToe()
     {
         board = new char[BOARDSIZE][BOARDSIZE];
         for (int i = 0; i<3; i++)
         {
-            for(int j = 3; j < 3; j++)
+            for(int j = 0; j < 3; j++)
             {
                 board[i][j] = ' ';
             }
         }
-        firstPlayer = true;
-        gameOver = false;
     }
 
+    /*
+     * Executing all functions in class TicTacToe.
+     * Recieve user input.
+     */
     public void play()
     {
         Scanner scan = new Scanner(System.in);
         printBoard();
 
+        int row = -1; int col = -1;
+
+        while (true) {
+        printStatus();
+        System.out.printf("Enter row number: ");
+        row = scan.nextInt();
+  
+        
+
+        System.out.printf("Enter col: ");
+        col = scan.nextInt();
+
+        if (this.validMove(row, col)) {
+            if (this.firstPlayer) {
+                board[row][col] = 'X';
+                this.firstPlayer = !this.firstPlayer;
+            } else {
+                board[row][col] = 'O';
+                this.firstPlayer = !this.firstPlayer;
+            }
+        }
+        this.printBoard();
+        if(this.gameStatus() == Status.WIN) {
+            System.out.println("Game Over!");
+            break;
+        }
+        this.printStatus();
+
+
+        }
+
     }
 
+    /*
+     * Displays grid and input from users 
+     */
 
     public void printBoard()
     {
@@ -60,9 +100,12 @@ public class TicTacToe
         System.out.print("|_______|_______|_______|\n");
     }
 
+    /*
+     * Checks and prints the turn of player
+     */
     private void printStatus()
     {
-        if (firstPlayer = true)
+        if (this.firstPlayer)
         {
             System.out.println("Player X's turn.");
         }
@@ -72,6 +115,10 @@ public class TicTacToe
         }
     }
 
+
+    /*
+     * Check if input is within the valid parameters
+     */
     private boolean validMove(int row, int col)
     {
         if (row < 0 || col < 0 || row > 2 || col > 2)
@@ -90,6 +137,10 @@ public class TicTacToe
         }
     }
 
+
+    /*
+     * Compares rows and columns to check for any win scenarios 
+     */
     private Status gameStatus()
     {
         for (int i = 0; i < 3; i++)
@@ -131,6 +182,9 @@ public class TicTacToe
         return Status.DRAW;
     }
 
+    /*
+     * Main will be creating object and calling the functinon play()
+     */
     public static void main(String[] args) 
     {
        TicTacToe game = new TicTacToe();
