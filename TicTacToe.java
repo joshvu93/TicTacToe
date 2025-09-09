@@ -33,6 +33,10 @@ public class TicTacToe
         System.out.print("Game Start:\n");
         printBoard();
 
+        int row = -1; int col = -1;
+
+       System.out.print("Enter Row: ");
+       row = scan.nextInt();
     }
 
 
