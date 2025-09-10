@@ -36,40 +36,48 @@ public class TicTacToe
     public void play()
     {
         Scanner scan = new Scanner(System.in);
-        System.out.print("Game Start:\n");
         printBoard();
 
         int row = -1; int col = -1;
 
         while (true) {
-        printStatus();
-        System.out.printf("Enter row number: ");
-        row = scan.nextInt();
-  
-        
+        try {
+            printStatus();
+            System.out.printf("Enter row number (0, 1 or 2 ): ");
+            row = scan.nextInt();        
 
-        System.out.printf("Enter col: ");
-        col = scan.nextInt();
+            System.out.printf("Enter column (0, 1, or 2): ");
+            col = scan.nextInt();
 
-        if (this.validMove(row, col)) {
-            if (this.firstPlayer) {
-                board[row][col] = 'X';
-                this.firstPlayer = !this.firstPlayer;
-            } else {
-                board[row][col] = 'O';
-                this.firstPlayer = !this.firstPlayer;
+            if (this.validMove(row, col)) {
+                if (this.firstPlayer) {
+                    board[row][col] = 'X';
+                    this.firstPlayer = !this.firstPlayer;
+                } else {
+                    board[row][col] = 'O';
+                    this.firstPlayer = !this.firstPlayer;
+                }
             }
+            this.printBoard();
+            if(this.gameStatus() == Status.WIN || this.gameStatus() == Status.DRAW) {
+                if(this.firstPlayer) {
+                System.out.println("Player O wins.\n");
+                break;
+                }
+                else 
+                {
+                    System.out.println("Player X wins.\n");
+                break;
+                }
+            } else if ( this.gameStatus() == Status.DRAW) {
+                System.out.println("Draw!");
+            }
+            this.printStatus();
+        } catch (Exception e) {
+            System.out.println("Error: Invalid Move. " + e.getMessage());
         }
-        this.printBoard();
-        if(this.gameStatus() == Status.WIN) {
-            System.out.println("Game Over!");
-            break;
-        }
-        this.printStatus();
-
 
         }
-
 
     }
 
@@ -79,7 +87,7 @@ public class TicTacToe
 
     public void printBoard()
     {
-        System.out.print("_________________________\n|       |       |       |\n");
+        System.out.print(" _______________________\n|       |       |       |\n");
         for (int i = 0; i < 3; i++)
         {
             System.out.print("|   "+ board[0][i] +"   ");
@@ -121,22 +129,19 @@ public class TicTacToe
     /*
      * Check if input is within the valid parameters
      */
-    private boolean validMove(int row, int col)
+    private boolean validMove(int row, int col) throws Exception
     {
         if (row < 0 || col < 0 || row > 2 || col > 2)
         {
-            System.out.println("Invalid move");
-            return false;
+            throw new Exception("Input is too high or too low");
+  
         }
         else if (board[row][col] != ' ')
         {
-            System.out.println("Invalid move");
-            return false;
+            throw new Exception("Space is already filled");
+
         }
-        else
-        {
-            return true;
-        }
+        return true;
     }
 
 
