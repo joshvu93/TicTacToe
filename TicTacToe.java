@@ -36,6 +36,7 @@ public class TicTacToe
     public void play()
     {
         Scanner scan = new Scanner(System.in);
+        System.out.print("Game Start:\n");
         printBoard();
 
         int row = -1; int col = -1;
@@ -69,6 +70,7 @@ public class TicTacToe
 
         }
 
+
     }
 
     /*
@@ -77,7 +79,7 @@ public class TicTacToe
 
     public void printBoard()
     {
-        System.out.print(" _______________________\n|       |       |       |\n");
+        System.out.print("_________________________\n|       |       |       |\n");
         for (int i = 0; i < 3; i++)
         {
             System.out.print("|   "+ board[0][i] +"   ");
