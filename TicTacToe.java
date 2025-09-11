@@ -39,15 +39,21 @@ public class TicTacToe
         printBoard();
 
         int row = -1; int col = -1;
+        String test;
+        String test2;
 
         while (true) {
         try {
             printStatus();
             System.out.printf("Enter row number (0, 1 or 2 ): ");
-            row = scan.nextInt();        
+            test = scan.nextLine();        
 
             System.out.printf("Enter column (0, 1, or 2): ");
-            col = scan.nextInt();
+            test2 = scan.nextLine();
+             inputCheck(test, test2);
+
+            row = Integer.parseInt(test);
+            col = Integer.parseInt(test2);
 
             if (this.validMove(row, col)) {
                 if (this.firstPlayer) {
@@ -188,6 +194,18 @@ public class TicTacToe
         }
         return Status.DRAW;
     }
+
+
+    public void inputCheck(String test, String test2) throws Exception
+    {
+        try {
+            int number = Integer.parseInt(test);
+            number = Integer.parseInt(test2);
+        } catch (NumberFormatException e) {
+            throw new Exception("Input was not a integer");
+        }
+    }
+
 
     /*
      * Main will be creating object and calling the functinon play()
