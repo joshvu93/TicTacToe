@@ -195,7 +195,9 @@ public class TicTacToe
         return Status.DRAW;
     }
 
-
+    /*
+     * Checks if input is an integer
+     */
     public void inputCheck(String test, String test2) throws Exception
     {
         try {
