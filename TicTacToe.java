@@ -6,7 +6,6 @@ public class TicTacToe
     private final int BOARDSIZE = 3;
     private char[][] board;
     private boolean firstPlayer = true;
-    private boolean gameOver = false;
 
     private enum Status 
     {
@@ -78,7 +77,7 @@ public class TicTacToe
         }
 
         }
-
+        scan.close();
     }
 
     /*
