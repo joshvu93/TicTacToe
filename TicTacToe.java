@@ -64,7 +64,7 @@ public class TicTacToe
                 }
             }
             this.printBoard();
-            if(this.gameStatus() == Status.WIN || this.gameStatus() == Status.DRAW) {
+            if(this.gameStatus() == Status.WIN) {
                 if(this.firstPlayer) {
                 System.out.println("Player O wins.\n");
                 break;
@@ -76,6 +76,7 @@ public class TicTacToe
                 }
             } else if ( this.gameStatus() == Status.DRAW) {
                 System.out.println("Draw!");
+                break;
             }
             this.printStatus();
         } catch (Exception e) {
